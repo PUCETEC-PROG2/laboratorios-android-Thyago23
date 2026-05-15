@@ -72,7 +72,7 @@ fun RepoItPreview() {
     RepoIt(
         name = "Repositorio de Santiago",
         description = "Proyecto de Desarrollo Movil",
-        avatarImg = "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Funiversidadeuropea.com%2Fblog%2Fmecanico-formula-1%2F&ved=0CBYQjRxqFwoTCJj9mPzVtJQDFQAAAAAdAAAAABAf&opi=89978449",
+        avatarImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/960px-F1.svg.png",
         language = "React"
     )
 }
