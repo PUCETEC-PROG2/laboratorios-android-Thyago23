@@ -18,13 +18,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import ec.edu.puce.githubclient.models.GithubUser
+import ec.edu.puce.githubclient.models.Repository
 
 @Composable
 fun RepoIt(
-    name: String,
-    description: String,
-    avatarImg: String,
-    language: String
+    repository: Repository
 ) {
     Card(
         modifier = Modifier
@@ -37,30 +36,34 @@ fun RepoIt(
                 .padding(all = 16.dp)
         ) {
             AsyncImage(
-                model = avatarImg,
-                contentDescription = "Imagen de $name",
+                model = repository.owner.avatarUrl,
+                contentDescription = "Imagen de ${repository.name}",
                 modifier = Modifier.size(size = 60.dp),
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.width(width = 16.dp))
             Column {
                 Text(
-                    text = name,
+                    text = repository.name,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(height = 4.dp))
-                Text(
-                    text = description,
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 3
-                )
+                repository.description?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 3
+                    )
+                }
                 Spacer(modifier = Modifier.height(height = 4.dp))
-                Text(
-                    text = language,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                repository.language?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
     }
@@ -69,10 +72,16 @@ fun RepoIt(
 @Preview(showBackground = true)
 @Composable
 fun RepoItPreview() {
-    RepoIt(
-        name = "Repositorio de Santiago",
-        description = "Proyecto de Desarrollo Movil",
-        avatarImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/960px-F1.svg.png",
-        language = "React"
+    val repository: Repository = Repository(
+        id = "12314",
+        name = "Repositoiro Djando",
+        description = "Descripcion del repositorio",
+        language = "Python",
+        owner = GithubUser(
+            id = "12313",
+            login = "SantiagoCedeño",
+            avatarUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1H68VNPY1-511LG3ez_wktw6pwfkBelusYQ&s",
+        )
     )
+    RepoIt(repository)
 }

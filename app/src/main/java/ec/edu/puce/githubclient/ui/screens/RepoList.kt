@@ -1,52 +1,69 @@
-package ec.edu.puce.githubclient.screens
+package ec.edu.puce.githubclient.ui.screens
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ec.edu.puce.githubclient.ui.components.RepoIt
+import ec.edu.puce.githubclient.viewmodels.RepoListViewModel
 
 @Composable
-fun RepoList() {
-    Column(
-        modifier = Modifier
-            .padding(horizontal = 4.dp, vertical = 48.dp)
+fun RepoLs (
+    modifier: Modifier= Modifier,
+    viewModel: RepoListViewModel = viewModel()
+) {
 
-    ) {
-        RepoIt(
-            name = "Repositorio Gitlab",
-            description = "Proyecto de Gitlab de Santiago",
-            avatarImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1H68VNPY1-511LG3ez_wktw6pwfkBelusYQ&s",
-            language = "Github"
-        )
-        RepoIt(
-            name = "Repositorio Proyecto Integrador",
-            description = "Proyecto Integrador Final",
-            avatarImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1H68VNPY1-511LG3ez_wktw6pwfkBelusYQ&s",
-            language = "TypeScript"
-        )
-        RepoIt(
-            name = "Repositorio Proof of Repair",
-            description = "Proyecto Dev Challenge",
-            avatarImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1H68VNPY1-511LG3ez_wktw6pwfkBelusYQ&s",
-            language = "React"
-        )
-        RepoIt(
-            name = "Repositorio DevChallenge Top1",
-            description = "Proyecto Integrador de DevChallenge",
-            avatarImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1H68VNPY1-511LG3ez_wktw6pwfkBelusYQ&s",
-            language = "Django"
-        )
+    val repos by viewModel.repos.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val errorMsg by viewModel.errorMsg.collectAsState()
+
+    Box(
+        modifier = modifier.fillMaxSize()
+
+    ){
+        if (isLoading){
+            CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
+
+        errorMsg?.let{
+            Text(
+                text = it,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(all = 16.dp)
+            )
+        }
+
+        if (!isLoading && errorMsg == null){
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+                items(repos.size){ i ->
+                    RepoIt(repos[i])
+                }
+            }
+        }
+
     }
+
 }
 
 @Preview(showBackground = true)
 @Composable
-fun RepoLsPreview() {
-    RepoList()
+fun RepoLsreview() {
+    RepoLs()
 }
