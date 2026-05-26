@@ -33,19 +33,20 @@ fun RepoLs(
     val errorMsg by viewModel.errorMsg.collectAsState()
 
     Scaffold(
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = onNavigateToForm,
-                shape = CircleShape,
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Agregar"
-                )
+            floatingActionButton = {
+                if (!isLoading && errorMsg == null)
+                FloatingActionButton(
+                    onClick = onNavigateToForm,
+                    shape = CircleShape,
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Agregar"
+                    )
+                }
             }
-        }
     ) { paddingValues ->
         Box(
             modifier = modifier
