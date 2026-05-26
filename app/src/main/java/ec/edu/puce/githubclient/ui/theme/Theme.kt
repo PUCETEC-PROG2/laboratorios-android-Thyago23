@@ -14,30 +14,35 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
-    tertiary = Pink80
+    tertiary = Pink80,
+    background = CarbonDeepDark,
+    surface = CarbonMedium,
+    onPrimary = WhitePure,
+    onSecondary = WhitePure,
+    onBackground = WhiteBase,
+    onSurface = WhiteBase
 )
 
+// Configuración exacta para tu pantalla (Modo Claro Premium)
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Purple40,             // ROJO (Asignado al título/iconos de la barra)
+    secondary = PurpleGrey40,       // NEGRO (Asignado al fondo del botón Guardar)
+    tertiary = Pink40,
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    background = WhitePure,         // Fondo general de la pantalla (Blanco Puro)
+    surface = WhitePure,            // Fondo de la barra superior (TopAppBar) cambiado a Blanco
+
+    onPrimary = WhitePure,
+    onSecondary = WhitePure,        // Texto Blanco dentro del botón Negro
+    onBackground = CarbonDeepDark,  // Texto oscuro para los títulos de los inputs
+    onSurface = CarbonDeepDark,     // Texto digitado dentro de los campos
+    onSurfaceVariant = CarbonTextGray // Color gris de los placeholders ("Nombre del repositorio")
 )
 
 @Composable
 fun GithubClientTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false, // Desactivado para que use estrictamente tu diseño GT3 RS
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

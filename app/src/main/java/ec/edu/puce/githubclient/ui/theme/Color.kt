@@ -2,10 +2,23 @@ package ec.edu.puce.githubclient.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// --- PALETA INSPIRADA EN THEME GT3 RS (image_cfb7aa.jpg) ---
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val WhitePure       = Color(0xFFFFFFFF) // Blanco puro para los fondos
+val WhiteBase       = Color(0xFFF9FAFB) // Blanco sutil para superficies
+
+val RedSportAccent  = Color(0xFFC01C24) // El Rojo Carmín deportivo para el título
+val RedSportDark    = Color(0xFF991B1B)
+
+val CarbonDeepDark  = Color(0xFF15171A) // El Negro premium para el botón
+val CarbonMedium    = Color(0xFF212429)
+val CarbonTextGray  = Color(0xFF8E96A0) // Gris para los placeholders de los inputs
+
+// --- Mapeo para Jetpack Compose ---
+val Purple80 = RedSportAccent
+val PurpleGrey80 = CarbonDeepDark
+val Pink80 = CarbonMedium
+
+val Purple40 = RedSportAccent
+val PurpleGrey40 = CarbonDeepDark
+val Pink40 = CarbonMedium
